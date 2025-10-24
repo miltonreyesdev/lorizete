@@ -284,35 +284,39 @@ nav ul li a:hover::after {
     background-color: var(--accent-light);
 }
 
-/* Sobre */
+/* Sobre - SECCIÓN CORREGIDA */
 .sobre {
     background-color: white;
 }
 
 .sobre-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
     gap: 50px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .sobre-img {
-    flex: 1;
-    border-radius: 10px;
+    flex: 0 0 320px;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
     overflow: hidden;
-    max-width: 400px;
     box-shadow: 0 10px 30px var(--shadow);
     border: 3px solid var(--secondary);
 }
 
 .sobre-img img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .sobre-content {
     flex: 1;
+    min-width: 300px;
+    text-align: left;
 }
 
 /* Serviços */
@@ -518,7 +522,7 @@ nav ul li a:hover::after {
     color: var(--text-light);
 }
 
-/* Contato */
+/* Contato - SECCIÓN CORREGIDA */
 .contato {
     background-color: var(--secondary-light);
 }
@@ -526,15 +530,18 @@ nav ul li a:hover::after {
 .contato-container {
     display: flex;
     gap: 50px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: flex-start;
 }
 
 .contato-info {
     flex: 1;
+    min-width: 300px;
 }
 
 .contato-form {
     flex: 1;
+    min-width: 300px;
 }
 
 .info-item {
@@ -547,6 +554,7 @@ nav ul li a:hover::after {
     font-size: 1.5rem;
     color: var(--primary);
     margin-right: 15px;
+    min-width: 30px;
 }
 
 .info-item a {
@@ -697,10 +705,8 @@ footer {
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
-    /* BLANCO SÓLIDO */
     font-size: 0.9rem;
     font-weight: 500;
-    /* Un poco más de peso para mejor legibilidad */
 }
 
 /* Botão WhatsApp */
@@ -875,13 +881,10 @@ footer {
         color: var(--primary, #702C90);
         line-height: 1.2;
         white-space: normal;
-        /* Permite quebra de linha */
         overflow: visible;
-        /* Evita os "..." */
         text-overflow: clip;
         display: flex;
         flex-direction: column;
-        /* Nome e profissão em duas linhas */
     }
 
     .logo span {
@@ -904,157 +907,192 @@ footer {
     .logo-mobile {
         display: none;
     }
+
+    nav ul {
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        display: none;
+        padding: 20px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 5px 15px var(--shadow);
+        text-align: center;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 8px 0;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 12px 20px;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--text);
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    nav ul li:last-child a {
+        border-bottom: none;
+    }
+
+    nav ul li a:hover {
+        background-color: var(--secondary-light);
+        color: var(--primary);
+        transform: none;
+        padding-left: 30px;
+    }
+
+    .mobile-menu {
+        display: block;
+        position: static;
+        margin-left: auto;
+        padding: 5px 10px;
+        background: var(--primary);
+        color: white;
+        border-radius: 5px;
+    }
+
+    .hero {
+        padding: 120px 20px 80px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .passos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .problemas-comuns p {
+        font-size: 1rem;
+    }
+
+    /* Responsive para oferta con logo */
+    .oferta-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .oferta-content {
+        text-align: center;
+    }
+
+    .oferta-logo {
+        flex: 0 0 auto;
+        max-width: 150px;
+        order: -1;
+    }
+
+    .oferta-content p {
+        font-size: 1.1rem;
+    }
+
+    /* Ajuste del botón WhatsApp para móviles */
+    .whatsapp-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    /* Ajustes para imágenes en móviles */
+    .servico-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .passo-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .depoimento-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Evitar scroll cuando el menú móvil está abierto */
+    body.menu-open {
+        overflow: hidden;
+    }
 }
 
+/* MEDIA QUERIES ESPECÍFICAS PARA SOBRE Y CONTATO */
+@media screen and (max-width: 768px) {
 
-nav ul {
-    flex-direction: column;
-    background: white;
-    width: 100%;
-    display: none;
-    padding: 20px 0;
-    /* Más padding vertical */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 5px 15px var(--shadow);
-    text-align: center;
-    /* Centrado del texto */
+    /* Para la sección Sobre */
+    .sobre-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .sobre-img {
+        flex: 0 0 auto;
+        max-width: 250px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .sobre-content {
+        text-align: center;
+        min-width: 100%;
+    }
+
+    /* Para la sección Contato */
+    .contato-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .contato-info,
+    .contato-form {
+        min-width: 100%;
+        width: 100%;
+    }
 }
 
-nav ul.active {
-    display: flex;
-}
-
-nav ul li {
-    margin: 8px 0;
-    /* Espaciado consistente */
-    width: 100%;
-}
-
-nav ul li a {
-    display: block;
-    padding: 12px 20px;
-    /* Más padding horizontal */
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text);
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    /* Separador sutil */
-}
-
-nav ul li:last-child a {
-    border-bottom: none;
-    /* Quitar borde del último item */
-}
-
-nav ul li a:hover {
-    background-color: var(--secondary-light);
-    color: var(--primary);
-    transform: none;
-    /* Quitar transform en móvil */
-    padding-left: 30px;
-    /* Efecto de desplazamiento */
-}
-
-.mobile-menu {
-    display: block;
-    position: static;
-    margin-left: auto;
-    padding: 5px 10px;
-    background: var(--primary);
-    color: white;
-    border-radius: 5px;
-}
-
-.sobre-container,
-.contato-container {
-    flex-direction: column;
-}
-
-.hero {
-    padding: 120px 20px 80px;
-}
-
-.hero h1 {
-    font-size: 2.2rem;
-}
-
-h1 {
-    font-size: 2rem;
-}
-
-h2 {
-    font-size: 1.6rem;
-}
-
-.passos {
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-.problemas-comuns p {
-    font-size: 1rem;
-}
-
-/* Responsive para oferta con logo */
-.oferta-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-}
-
-.oferta-content {
-    text-align: center;
-}
-
-.oferta-logo {
-    flex: 0 0 auto;
-    max-width: 150px;
-    order: -1;
-}
-
-.oferta-content p {
-    font-size: 1.1rem;
-}
-
-/* Ajuste del botón WhatsApp para móviles */
-.whatsapp-btn {
-    width: 55px;
-    height: 55px;
-    font-size: 1.6rem;
-    bottom: 15px;
-    right: 15px;
-}
-
-/* Ajustes para imágenes en móviles */
-.servico-img {
-    width: 80px;
-    height: 80px;
-}
-
-.passo-img {
-    width: 70px;
-    height: 70px;
-}
-
-.depoimento-img {
-    width: 50px;
-    height: 50px;
-}
-
-/* Evitar scroll cuando el menú móvil está abierto */
-body.menu-open {
-    overflow: hidden;
-}
-
-
+/* Para pantallas muy pequeñas */
 @media screen and (max-width: 480px) {
     section {
         padding: 60px 0;
+    }
+
+    .sobre-container,
+    .contato-container {
+        gap: 20px;
+    }
+
+    .sobre-img {
+        max-width: 200px;
+    }
+
+    .contato-info,
+    .contato-form {
+        min-width: 100%;
     }
 
     .hero h1 {
@@ -1089,7 +1127,6 @@ body.menu-open {
 
     nav ul li a {
         padding: 15px 20px;
-        /* Más padding en móviles pequeños */
         font-size: 1rem;
     }
 
