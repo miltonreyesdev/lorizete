@@ -32,7 +32,6 @@ const initializeMobileMenu = () => {
     // Event listeners
     mobileMenu.addEventListener('click', toggleMenu);
 
-    // Cerrar menú al hacer clic en enlaces
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', closeMenuOnLinkClick);
     });
@@ -119,17 +118,16 @@ const initializeContactForm = () => {
         submitButton.disabled = true;
 
         try {
-            // Simular envío (reemplazar con tu endpoint real)
-            await simulateFormSubmission();
+            // ✅ Envío real a Formspree
+            await sendFormToFormspree();
 
-            // Mensaje de éxito más elegante
+            // Mensaje de éxito
             showSuccessMessage();
 
             // Limpiar formulario
             contactForm.reset();
 
         } catch (error) {
-            // Mensaje de error
             alert('❌ Hubo un error al enviar el mensaje. Por favor, intente nuevamente o contácteme directamente por WhatsApp.');
             console.error('Error en el formulario:', error);
         } finally {
@@ -139,11 +137,23 @@ const initializeContactForm = () => {
         }
     });
 
-    // Simulación de envío (reemplazar con tu API real)
-    const simulateFormSubmission = () => {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(), 1500);
+    // ✅ Nueva función: Envío real a Formspree
+    const sendFormToFormspree = async () => {
+        const formData = new FormData(contactForm);
+
+        const response = await fetch("https://formspree.io/f/xeopezer", {
+            method: "POST",
+            body: formData,
+            headers: {
+                Accept: "application/json",
+            },
         });
+
+        if (!response.ok) {
+            throw new Error("Error al enviar el formulario");
+        }
+
+        return response;
     };
 
     const showSuccessMessage = () => {
@@ -225,10 +235,8 @@ const initializeWhatsAppButton = () => {
 
     if (!whatsappBtn) return;
 
-    // ELIMINADO: Código que ocultaba el botón al hacer scroll
-    // Ahora el botón siempre estará visible
-
-    // Solo añadimos un efecto de pulso ocasional para llamar la atención
+    // El botón ahora siempre está visible
+    // Efecto de pulso ocasional
     setInterval(() => {
         whatsappBtn.style.transform = 'scale(1.1)';
         setTimeout(() => {
